@@ -2,3 +2,5 @@ deb/
 hiasm5
 *.so
 runner
+*.o
+*.exe
