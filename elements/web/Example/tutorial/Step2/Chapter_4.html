@@ -1,0 +1,30 @@
+<script language="javascript">
+  function multi_call14() {
+    var val23 = "";
+    
+    for(var i17 = 0; i17 < 10; i17++) {
+      val23 = val23 + "<div style=\"border: solid 1px red;\">div</div>";
+    }
+    return(val23);
+  }
+</script>
+
+<html>
+  <head>
+    <title>
+      Chapter 4: Использование переменных</title>
+    <style>
+      div {  border-color: gray; border-width: 1px; border-style: solid; background-color: lightgray; width: auto; height: 20px; vertical-align: center; }
+    </style>
+  </head>
+  <body>
+    В этом примере демонстрируется использование элемента Memory при различных параметрах<div id="add">
+    </div>
+    <a href="#" onclick='document.getElementById("add").innerHTML = multi_call14();'>
+      тег div</a>
+    <a href="#" onclick='document.getElementById("add").innerHTML = "";'>
+       clear </a>
+  </body>
+</html>
+
+<!-- made by HiAsm 5.0 build 12 -->

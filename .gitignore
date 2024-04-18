@@ -1,0 +1,4 @@
+deb/
+hiasm5
+*.so
+runner
