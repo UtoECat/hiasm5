@@ -3,4 +3,5 @@ hiasm5
 *.so
 runner
 *.o
+*.ppu
 *.exe

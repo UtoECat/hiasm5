@@ -1,12 +1,5 @@
 all:
-	cd src && make
-	cd .. 
-	cd runnersrc
-	./create-links.sh
-	cd ..
-	cd FTCG
-	./make.sh
-	cd ..
-	cd RTCG
-	make
-	cd ..
+	cd src && make -j4
+	cd runnersrc && make -j4
+	cd FTCG && ./make.sh
+	cd RTCG && make -j4
