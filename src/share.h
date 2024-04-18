@@ -124,7 +124,7 @@ typedef Gdk::RGBA TypeColor;
 
 // macro -----------------------------------------------------------------------------------------------
 #define TRACE_PROC //std::cout << "[" << __FILE__ << "]:" << __FUNCTION__ << std::endl;
-#define DEBUG_MSG(v) {}// std::cout << v << std::endl;
+#define DEBUG_MSG(v) std::cout << v << std::endl;
 #define ERROR_MSG(v) std::cout << v << std::endl;
 
 // buttons ---------------------------------------------------------------------------------------------

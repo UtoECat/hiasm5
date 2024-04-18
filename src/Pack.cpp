@@ -12,6 +12,7 @@
 #include "Pack.h"
 #include "MainDataBase.h"
 #include "settings.h"
+#include "share.h"
 
 PackCollection *packSet;
 
@@ -40,6 +41,12 @@ void PackProject::make(const ustring &project, void *result) {
 	ustring mdir = pack->pathMake() + lib;
 
 	GModule *handle  = g_module_open(mdir.c_str(), G_MODULE_BIND_LAZY);
+  if (!handle) {
+    ERROR_MSG(mdir.c_str());
+    ERROR_MSG(g_module_error());
+    return;
+  }
+
 	TbuildMakePrj buildMakePrj;
 	if(g_module_symbol(handle, "buildMakePrj", (gpointer *)&buildMakePrj)) {
 		ustring prj_name = project + "." + ext;

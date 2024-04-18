@@ -8,6 +8,7 @@
 #include "ProjectBuilder.h"
 #include "CodeGen.h"
 #include "settings.h"
+#include "share.h"
 
 #ifndef CFG_CONSOLE_BUILDER
 #include "SettingsManager.h"
@@ -59,7 +60,7 @@ void ProjectBuilder::buildWithCodeGen(MSDK *sdk, const ustring &name) {
 		cgt_on_debug.run((ustring("!Codegen not found: ") + cgen).c_str());
 		return;
 	}
-
+	cgt_on_debug.run((ustring("~Loaded codegen: ") + cgen).c_str());
 	GModule *handle  = g_module_open(cgen.c_str(), G_MODULE_BIND_LAZY);
 	if(!handle) {
 		cgt_on_debug.run((ustring("!Error load codegen: ") + cgen).c_str());
