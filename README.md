@@ -16,4 +16,4 @@ this repository contains everything in one place to build hiasm 5 and use the WE
 1. install ```gtksourceviewmm-3.0-dev gtkmm-2.4-dev libsqlite3-dev md5deep fpc```
   1. on Debian/Ubuntu don't forget to set corrent PKG_CONFIG_PATH
 2. run ```make```
-3. Ready...?
+3. Done...?
