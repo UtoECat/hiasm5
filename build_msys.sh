@@ -3,10 +3,14 @@
 
 export PKG_CONFIG_PATH=/mingw64/lib/pkgconfig
 PLATFORM_PREFIX="mingw-w64-x86_64-"
-pacman -S "${PLATFORM_PREFIX}gtksourceviewmm3" "${PLATFORM_PREFIX}gdk-pixbuf2" "${PLATFORM_PREFIX}sqlite3" "${PLATFORM_PREFIX}gtkmm" "${PLATFORM_PREFIX}cmake" "${PLATFORM_PREFIX}make"
 
-mkdir build
-cd build
+if [ ! -d "./build" ]; then
+  echo "$./build/ directory does not exist. installing packages and stuff"
+  pacman -S "${PLATFORM_PREFIX}gtksourceviewmm3" "${PLATFORM_PREFIX}gdk-pixbuf2" "${PLATFORM_PREFIX}sqlite3" "${PLATFORM_PREFIX}gtkmm" "${PLATFORM_PREFIX}cmake" "${PLATFORM_PREFIX}make" --noconfirm
+  mkdir build
+fi
 
-cmake.exe ..
-make.exe
+cd build || { echo "build directory creation failed!"; exit -1; }
+
+cmake.exe .. -G "MinGW Makefiles"
+mingw32-make.exe
