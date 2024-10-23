@@ -10,6 +10,7 @@
 
 #include <glib.h>
 #include <gtkmm.h>
+#include <glib.h>
 
 #include <iostream>
 

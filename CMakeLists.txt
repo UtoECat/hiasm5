@@ -23,9 +23,9 @@ include_directories(${GTKMM_INCLUDE_DIRS})
 file(GLOB RUNNERSRC_SOURCES runnersrc/*.cpp)
 
 # Create the runner executable
-#add_executable(runner ${RUNNERSRC_SOURCES})
-#target_link_directories(runner PRIVATE ${GTKMM_LIBRARY_DIRS})
-#target_link_libraries(runner PRIVATE ${GTKMM_LIBRARIES} pthread)
+add_executable(runner ${RUNNERSRC_SOURCES})
+target_link_directories(runner PRIVATE ${GTKMM_LIBRARY_DIRS})
+target_link_libraries(runner PRIVATE ${GTKMM_LIBRARIES} pthread)
 
 # Source files for src
 file(GLOB SRC_SOURCES src/*.cpp)

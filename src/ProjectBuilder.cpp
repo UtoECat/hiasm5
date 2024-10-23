@@ -27,7 +27,13 @@ void ProjectBuilder::buildIneternal(MSDK *sdk, const ustring &name) {
 	}
 	gchar *cont;
 	gsize len;
-	g_file_get_contents((dataDir + "runner").c_str(), &cont, &len, NULL);
+	g_file_get_contents((dataDir +
+	#ifdef G_OS_WIN32
+	 "runner.exe"
+	#else
+	 "runner"
+	#endif
+	).c_str(), &cont, &len, NULL);
 	if(len > 0) {
 		fwrite(cont, 1, len, f);
 		g_free(cont);
@@ -38,7 +44,7 @@ void ProjectBuilder::buildIneternal(MSDK *sdk, const ustring &name) {
 	}
 	ustring text;
 	sdk->saveToText(text, ustring());
-	text = "Make(_base)"LINE_END + text;
+	text = "Make(_base)" LINE_END + text;
 	const char *data = text.c_str();
 	fwrite(data, strlen(data), 1, f);
 	fwrite("\0", 1, 1, f);
@@ -55,7 +61,13 @@ typedef int(*TbuildPrepareProc)(void *);
 typedef int(*TbuildProcessProc)(TBuildProcessRec *);
 
 void ProjectBuilder::buildWithCodeGen(MSDK *sdk, const ustring &name) {
-	ustring cgen(sdk->pack->path() + "libCodeGen.so");
+	ustring cgen(sdk->pack->path() + 
+	#ifdef G_OS_WIN32
+	"libCodeGen.dll"
+	#else
+	"libCodeGen.so"
+	#endif
+	 );
 	if(!file_test(cgen, FILE_TEST_EXISTS)) {
 		cgt_on_debug.run((ustring("!Codegen not found: ") + cgen).c_str());
 		return;
