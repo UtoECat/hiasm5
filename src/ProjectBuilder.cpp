@@ -63,7 +63,7 @@ typedef int(*TbuildProcessProc)(TBuildProcessRec *);
 void ProjectBuilder::buildWithCodeGen(MSDK *sdk, const ustring &name) {
 	ustring cgen(sdk->pack->path() + 
 	#ifdef G_OS_WIN32
-	"libCodeGen.dll"
+	"CodeGen.dll"
 	#else
 	"libCodeGen.so"
 	#endif
