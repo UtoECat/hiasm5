@@ -6,6 +6,7 @@
  */
 
 #include "MainDataBase.h"
+#include <sqlite3.h>
 
 MainDataBase mdb;
 
@@ -16,6 +17,23 @@ void MainDataBase::open() {
 
 void MainDataBase::close() {
 	sqlite3_close(db);
+}
+
+
+static void _dbgquery(sqlite3_stmt* stmt) {
+	std::cout << "DEBUG SQL STEP : ";
+	for (int i = 0; i < sqlite3_data_count(stmt); i++) 
+		switch(sqlite3_column_type(stmt, i)) {
+			case SQLITE_INTEGER:
+				std::cout << sqlite3_column_int(stmt, i) << ", ";
+			case SQLITE_TEXT:
+				std::cout << sqlite3_column_text(stmt, i) << ", ";
+			case SQLITE_FLOAT:
+				std::cout << sqlite3_column_double(stmt, i) << ", ";
+			case SQLITE_NULL:
+				std::cout << "(NULL)" << ", ";
+		}
+	std::cout << std::endl;
 }
 
 sqlite3_stmt *MainDataBase::query(const ustring &sql) {
@@ -35,6 +53,7 @@ void MainDataBase::exec(const ustring &sql) {
 ustring MainDataBase::read_loc() {
 	sqlite3_stmt *r = query("select pref from localization where active = 1");
 	sqlite3_step(r);
+	_dbgquery(r);
 	ustring result = ustring("info_id_") + (const char *)sqlite3_column_text(r, 0);
 	sqlite3_finalize(r);
 	return result;
@@ -57,6 +76,7 @@ void *MainDataBase::begin_read_commands() {
 
 bool MainDataBase::read_commands(void *id, CommandInfo &cmd) {
 	if(sqlite3_step((sqlite3_stmt*)id) != SQLITE_DONE) {
+		_dbgquery((sqlite3_stmt*)id);
 		cmd.name = (const char *)sqlite3_column_text((sqlite3_stmt*)id, 0);
 		cmd.info = (const char *)sqlite3_column_text((sqlite3_stmt*)id, 1);
 		return true;
@@ -71,6 +91,7 @@ void MainDataBase::end_read(void *id) {
 void *MainDataBase::begin_read_command_menu(const ustring &name) {
 	sqlite3_stmt *r = query(ustring("select id from menus where name = '") + name + "'");
 	sqlite3_step(r);
+	_dbgquery(r);
 	int m = sqlite3_column_int(r, 0);
 	char buf[8];
 	sprintf(buf, "%d", m);
@@ -96,6 +117,7 @@ void *MainDataBase::begin_read_packs() {
 
 bool MainDataBase::read_packs(void *id, PackInfo &pack) {
 	if(sqlite3_step((sqlite3_stmt*)id) != SQLITE_DONE) {
+		_dbgquery((sqlite3_stmt*)id);
 		pack.name = (const char *)sqlite3_column_text((sqlite3_stmt*)id, 0);
 		pack.info = (const char *)sqlite3_column_text((sqlite3_stmt*)id, 1);
 		pack.codeName = (const char *)sqlite3_column_text((sqlite3_stmt*)id, 2);
@@ -109,6 +131,7 @@ bool MainDataBase::read_packs(void *id, PackInfo &pack) {
 void *MainDataBase::begin_read_projects(const ustring &name) {
 	sqlite3_stmt *r = query(ustring("select id from packs where codename = '") + name + "'");
 	sqlite3_step(r);
+	_dbgquery(r);
 	int m = sqlite3_column_int(r, 0);
 	sqlite3_finalize(r);
 
@@ -120,6 +143,7 @@ void *MainDataBase::begin_read_projects(const ustring &name) {
 
 bool MainDataBase::read_projects(void *id, ProjectInfo &project) {
 	if(sqlite3_step((sqlite3_stmt*)id) != SQLITE_DONE) {
+		_dbgquery((sqlite3_stmt*)id);
 		project.entry = (const char *)sqlite3_column_text((sqlite3_stmt*)id, 0);
 		project.name = (const char *)sqlite3_column_text((sqlite3_stmt*)id, 1);
 		project.info = (const char *)sqlite3_column_text((sqlite3_stmt*)id, 2);
@@ -139,6 +163,7 @@ void *MainDataBase::begin_read_settings(int pid) {
 
 bool MainDataBase::read_settings(void *id, ParamInfo &param) {
 	if(sqlite3_step((sqlite3_stmt*)id) != SQLITE_DONE) {
+		_dbgquery((sqlite3_stmt*)id);
 		param.id = readInt(id, 0);
 		param.pid = readInt(id, 1);
 		param.name = readStr(id, 2);
@@ -158,6 +183,7 @@ void *MainDataBase::begin_read_settings_value() {
 
 bool MainDataBase::read_settings_value(void *id, ParamInfo &param) {
 	if(sqlite3_step((sqlite3_stmt*)id) != SQLITE_DONE) {
+		_dbgquery((sqlite3_stmt*)id);
 		param.id = readInt(id, 0);
 		param.value = readStr(id, 1);
 		param.type = readInt(id, 2);
@@ -176,6 +202,7 @@ void *MainDataBase::begin_read_compilers() {
 
 bool MainDataBase::read_compilers(void *id, CompilerInfo &compiler) {
 	if(sqlite3_step((sqlite3_stmt*)id) != SQLITE_DONE) {
+		_dbgquery((sqlite3_stmt*)id);
 		compiler.id = readInt(id, 0);
 		compiler.name = (const char *)sqlite3_column_text((sqlite3_stmt*)id, 1);
 		compiler.cmd = (const char *)sqlite3_column_text((sqlite3_stmt*)id, 2);
@@ -189,6 +216,7 @@ bool MainDataBase::read_compilers(void *id, CompilerInfo &compiler) {
 void *MainDataBase::begin_read_pack_compilers(const ustring &name) {
 	sqlite3_stmt *r = query(ustring("select id from packs where codename = '") + name + "'");
 	sqlite3_step(r);
+	_dbgquery(r);
 	int m = sqlite3_column_int(r, 0);
 	sqlite3_finalize(r);
 
@@ -197,6 +225,7 @@ void *MainDataBase::begin_read_pack_compilers(const ustring &name) {
 
 bool MainDataBase::read_pack_compilers(void *id, PackCompilerInfo &compiler) {
 	if(sqlite3_step((sqlite3_stmt*)id) != SQLITE_DONE) {
+		_dbgquery((sqlite3_stmt*)id);
 		compiler.compiler = readInt(id, 0);
 		compiler.active = readInt(id, 1) == 1;
 		return true;
