@@ -1,0 +1,4 @@
+{
+  "cmake.debugConfig": {"cwd": "${workspaceFolder}"},
+  "cmake.buildArgs": ["-j2"]
+}

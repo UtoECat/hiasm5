@@ -1,0 +1,4 @@
+---
+  CompileFlags:
+    CompilationDatabase: build/
+    Add: ["-I.", "--analyze", "-fno-rtti", "-Wall"]

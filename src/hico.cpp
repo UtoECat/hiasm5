@@ -19,6 +19,10 @@ using namespace Gtk;
 
 int main(int argc, char** argv) {
 	g_thread_init(NULL);
+
+	// Set the GTK theme to light
+  g_setenv("GTK_THEME", "Adwaita:light", TRUE);
+	
 #ifndef G_OS_WIN32
 	gdk_threads_init();
 #endif

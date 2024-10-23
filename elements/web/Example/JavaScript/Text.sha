@@ -1,4 +1,5 @@
 Make(web)
+ver(5.0.12)
 Add(HtmlEntryPoint,6444038,21,105)
 {
  link(onStart,324267:doPrint,[])
@@ -9,8 +10,8 @@ Add(HTM_Html,324267,77,105)
 }
 Add(HTM_Div,9408152,273,203)
 {
- Class="main"
- Id="main"
+ Class=#4:main|
+ Id=#4:main|
  link(onPrint,15576345:doEcho,[])
 }
 Add(HTM_Style,1898430,217,154)
@@ -26,22 +27,22 @@ Add(Hub,7465234,133,105)
 }
 Add(HTM_Body,15491478,217,203)
 {
- Point(onMouseMove)
- Point(onLoad)
- Point(onBeforeUpdate)
  link(onPrint,9408152:doPrint,[])
+ Point(onMouseMove)
  link(onMouseMove,9487447:doPosition,[(261,216)(261,265)])
- link(onLoad,10777630:doData,[(261,223)(261,321)])
+ Point(onLoad)
+ link(onLoad,10777630:doData,[(256,223)(256,321)])
+ Point(onBeforeUpdate)
 }
 Add(CSS,8590754,273,154)
 {
- Name="main"
+ Name=#4:main|
  TextAlign=2
- BgColor="gold"
- Width="50"
- Height="50"
+ BgColor=#4:gold|
+ Width=#2:50|
+ Height=#2:50|
  Position=2
- VerticalAlign="center"
+ VerticalAlign=#6:center|
  link(onPrint,12069882:doPrint,[])
 }
 Add(Timer,11874539,329,315)
@@ -51,7 +52,7 @@ Add(Timer,11874539,329,315)
 }
 Add(Echo,15576345,329,203)
 {
- Message="HiAsm"
+ Message=#5:HiAsm|
 }
 Add(HTM_Head,12529672,217,105)
 {
@@ -63,7 +64,7 @@ Add(HTM_Title,142091,273,105)
 }
 Add(Echo,14521885,329,105)
 {
- Message="Drag box"
+ Message=#8:Drag box|
 }
 Add(MouseEvent,8759712,385,203)
 {
@@ -76,26 +77,34 @@ Add(Math,11862226,385,315)
 }
 Add(TAG_Position,9487447,273,259)
 {
- Id="main"
+ Id=#4:main|
  link(onPosition,4640436:doPosition,[])
  link(Value,8759712:X,[(286,247)(391,247)])
 }
 Add(CSS,12069882,329,154)
 {
- Tag="body"
- Height="100%"
+ Tag=#4:body|
+ Height=#4:100%|
 }
 Add(TAG_Position,4640436,329,259)
 {
- Id="main"
+ Id=#4:main|
  Place=1
  link(Value,8759712:Y,[(342,247)(398,247)])
 }
 Add(TAG_InnerHTML,16119938,434,315)
 {
- Id="main"
+ Id=#4:main|
 }
 Add(DoData,10777630,273,315)
 {
  link(onEventData,11874539:doTimer,[])
 }
+Add(CreateFunction,23,574,21)
+{
+}
+BEGIN_SDK
+ Add(FuncBody,22,14,14)
+ {
+ }
+END_SDK

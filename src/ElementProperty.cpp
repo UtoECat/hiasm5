@@ -209,7 +209,7 @@ void DataValue::parseStrList(const ustring &text, void *value) {
 		*(ustring *)value = buf;
 	}
 
-	delete sb;
+	delete[] sb;
 }
 
 void DataValue::parsePixbuf(const ustring &text, void *value) {

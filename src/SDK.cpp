@@ -489,7 +489,7 @@ SDKParseError SDK::loadFromText(gchar *&text, int &line, int flag) {
 							int y = atoi(getTok(&path, ')'));
 							pp = p1->addLinePoint(pp, x, y);
 						}
-						delete del_path;
+						delete[] del_path;
 					}
 					else
 						DEBUG_MSG("Point not found: " << (*p).p1)

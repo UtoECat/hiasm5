@@ -5,3 +5,5 @@ runner
 *.o
 *.ppu
 *.exe
+/build
+/buildwin
