@@ -1,5 +1,6 @@
 #include <stdio.h>
-
+#include <string.h>
+#include <stdlib.h>
 #include "../../CGTShare.h"
 
 int buildGetParamsProc(TBuildParams *params) {
@@ -30,7 +31,16 @@ int buildRunProc(TBuildRunRec *params) {
   while(WaitForSingleObject(pi7.hProcess, -1) == WAIT_TIMEOUT) {
   }
 */
-  return CG_SUCCESS;
+    // Construct the command to open the HTML file
+    char command[9999];
+    #ifdef _WIN32
+        // For Windows
+        snprintf(command, sizeof(command), "start %s", params->FileName);
+    #else
+        // For Unix/Linux/Mac
+        snprintf(command, sizeof(command), "xdg-open %s", params->FileName);
+    #endif
+  return system(command) == 0 ? CG_SUCCESS : CG_NOT_FOUND;
 }
 
 int main() {
