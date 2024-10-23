@@ -1,5 +1,9 @@
 cmake_minimum_required(VERSION 3.10)
+set(CMAKE_CXX_STANDARD 11)  # or your desired standard
+
 project(MyProject)
+
+set(CMAKE_DISABLE_IN_SOURCE_BUILD TRUE)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_VERBOSE_MAKEFILE ON)
