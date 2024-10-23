@@ -6,7 +6,7 @@ PLATFORM_PREFIX="mingw-w64-ucrt-x86_64-"
 
 if [ ! -d "./build" ]; then
   echo "$./build/ directory does not exist. installing packages and stuff"
-  pacman -S "${PLATFORM_PREFIX}gtksourceviewmm3" "${PLATFORM_PREFIX}gdk-pixbuf2" "${PLATFORM_PREFIX}sqlite3" "${PLATFORM_PREFIX}gtkmm" "${PLATFORM_PREFIX}glibmm" --noconfirm
+  pacman -S "${PLATFORM_PREFIX}gtksourceviewmm3" "${PLATFORM_PREFIX}gdk-pixbuf2" "${PLATFORM_PREFIX}sqlite3" "${PLATFORM_PREFIX}gtkmm" "${PLATFORM_PREFIX}gtk3" "${PLATFORM_PREFIX}glibmm" --noconfirm
   pacman -S "${PLATFORM_PREFIX}cmake" "${PLATFORM_PREFIX}make" "${PLATFORM_PREFIX}gcc" "${PLATFORM_PREFIX}binutils" --noconfirm
   mkdir build
 fi
