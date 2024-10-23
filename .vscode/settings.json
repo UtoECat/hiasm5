@@ -1,4 +1,8 @@
 {
   "cmake.debugConfig": {"cwd": "${workspaceFolder}"},
-  "cmake.buildArgs": ["-j2"]
+  "cmake.buildArgs": [
+    "-j2"
+  ],
+  "cmake.ctest.parallelJobs": 2,
+  "cmake.parallelJobs": 2
 }

@@ -13,7 +13,7 @@ find_package(PkgConfig REQUIRED)
 pkg_check_modules(GTKMM REQUIRED gtksourceviewmm-3.0 sqlite3 gthread-2.0 gmodule-2.0)
 
 # Set compiler flags
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -O1 -g -fPIC")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -O1 -g -fPIC -fpermissive") # required, 'cause code is old and shitty
 add_link_options(-g)
 
 # Include directories

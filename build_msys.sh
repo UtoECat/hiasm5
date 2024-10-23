@@ -2,7 +2,9 @@
 # THIS SCRIPT uses msys2 enviroment with mingw to build this app
 
 export PKG_CONFIG_PATH=/mingw64/lib/pkgconfig
-PLATFORM_PREFIX="mingw-w64-ucrt-x86_64-"
+# NOTICE: we use MINGW64! NOT SUGGESTED BY gtk docs ucrt! UCRT IS BROKEN AS HELL!!
+# If hiasm does not work after startup : run `chcp.com 65001` !
+PLATFORM_PREFIX="mingw-w64-x86_64-"
 
 if [ ! -d "./build" ]; then
   echo "$./build/ directory does not exist. installing packages and stuff"
