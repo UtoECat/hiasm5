@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.10)
 project(MyProject)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(CMAKE_VERBOSE_MAKEFILE ON)
 
 # Find required packages
 find_package(PkgConfig REQUIRED)
