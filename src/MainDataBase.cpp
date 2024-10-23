@@ -20,6 +20,7 @@ void MainDataBase::close() {
 
 sqlite3_stmt *MainDataBase::query(const ustring &sql) {
 	sqlite3_stmt *result;
+	std::cout << "DEBUG SQL(QUERY) : " << sql.c_str() << std::endl;
 	sqlite3_prepare(db, sql.c_str(), -1, &result, NULL);
 	if(!result)
 		std::cout << "Sql query " << sql.c_str() << " return empty result!" << std::endl;
@@ -27,6 +28,7 @@ sqlite3_stmt *MainDataBase::query(const ustring &sql) {
 }
 
 void MainDataBase::exec(const ustring &sql) {
+	std::cout << "DEBUG SQL(EXEC)  : " << sql.c_str() << std::endl;
 	sqlite3_exec(db, sql.c_str(), NULL, NULL, NULL);
 }
 
