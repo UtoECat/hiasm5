@@ -1,19 +1,18 @@
 ![ScreenShot](http://i.mcgl.ru/KfOVAZ8ni3)
 
-HiAsm 5 - desktop IDE to create programs with a graphical programming
+HiAsm 5 - Desktop IDE to create programs with graphical programming.
 
 http://hiasm.com
 
-## this fork
+## This Fork
 
-this repository contains everything in one place to build hiasm 5 and use the WEB and _base packages without having to install any third party .deb packages.
+This repository contains everything in one place to build HiAsm 5 and use the WEB and _base packages without having to install any third-party .deb packages.
 
 - Updated FTCG source codes for compilation with the modern FPC compiler.
-- The resource directory in Linux is located in the same way as in Windows or MAC OS.
-- Only Linux has been verified to build successfully.
+- The resource directory in Linux is located in the same way as in Windows or macOS.
+- Only Linux and Windows have been verified to build successfully.
+- Uses CMake build system + a small amount of bash scripts.
 
-## how to build
-1. install ```gtksourceviewmm-3.0-dev gtkmm-2.4-dev libsqlite3-dev md5deep fpc```
-  1. on Debian/Ubuntu don't forget to set corrent PKG_CONFIG_PATH
-2. run ```make```
-3. Done...?
+## How to Build
+- Windows (MSYS2): [click](docs/build_windows.md)
+- Linux/UNIX: [click](docs/build-unix_and_linux.md)
