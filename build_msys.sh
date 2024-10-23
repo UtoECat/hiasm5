@@ -12,5 +12,5 @@ fi
 
 cd build || { echo "build directory creation failed!"; exit -1; }
 
-cmake.exe .. -G "MinGW Makefiles"
-mingw32-make.exe
+cmake.exe .. -G "MSYS2 Makefiles"
+make.exe
